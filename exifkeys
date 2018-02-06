@@ -1,0 +1,27 @@
+#!/bin/sh
+KEYWORDS=$(cat keywords.txt)
+echo $KEYWORDS
+CAPTION=$(cat caption.txt)
+echo $CAPTION
+CAPTIONTRIM=$(cat caption.txt | sed 's/.$//')
+echo $CAPTIONTRIM
+FILENAME=${PWD##*/}
+exiftool -m \
+	-"XPTitle"="$CAPTION" \
+	-"Object Name"="$CAPTION" \
+	-"Title"="$CAPTION" \
+	-"Headline"="$CAPTION" \
+	\
+	-"ImageDescription"="$CAPTIONTRIM" \
+	-"XPSubject"="$CAPTIONTRIM" \
+	-"Caption-Abstract"="$CAPTIONTRIM" \
+	-"Description"="$CAPTIONTRIM" \
+	\
+	-"XPKeywords"="$KEYWORDS" \
+	-"Keywords"="$KEYWORDS" \
+	-"Subject"="$KEYWORDS" \
+	-"LastKeywordXMP"="$KEYWORDS" \
+	\
+	"$FILENAME.jpg"
+
+zip "$FILENAME" "$FILENAME.eps" "$FILENAME.jpg"
