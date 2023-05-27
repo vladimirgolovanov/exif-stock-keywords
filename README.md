@@ -3,3 +3,5 @@
 ```
 sudo apt install libimage-exiftool-perl
 ```
+
+or install from https://exiftool.org/install.html
